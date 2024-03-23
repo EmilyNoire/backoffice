@@ -1,0 +1,15 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav class="sidenav" mode="side" opened>
+        <mat-nav-list>
+            @for(item of sidebarItems; track item) {
+            <a mat-list-item (mouseenter)="highlightItem(item)" (mouseleave)="removeHighlight(item)">
+            {{item}}
+            </a>
+            }
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        test test
+    </mat-sidenav-content>
+</mat-sidenav-container>

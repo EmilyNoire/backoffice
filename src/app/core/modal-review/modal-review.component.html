@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Recensioni</h2>
+<div mat-dialog-content>
+    <ul>
+        @if(row.data.reviews && row.data.reviews.length > 0) {
+            @for(review of row.data.reviews; track review) {
+                <li>{{ review }}</li>
+            }
+        } @else {
+            <li>Non sono presenti recensioni</li>
+        }
+    </ul>
+</div>
+<div>
+    <form [formGroup]="newReviews" (ngSubmit)="onSubmit()">
+        <label for="newreview">Aggiungi una nuova recensione</label>
+        <input id="newreview" type="text" formControlName="reviews">
+    </form>
+    
+    <button mat-icon-button [disabled]="!newReviews.valid">
+        <mat-icon aria-label="Save" type="submit">save</mat-icon>
+    </button>
+</div>
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="true">Chiudi</button>
+</div>

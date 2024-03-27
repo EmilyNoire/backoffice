@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { TableComponent } from "../table/table.component";
 
 
 @Component({
-  selector: 'app-sidebar',
-  standalone: true,
-  imports: [MatSidenavModule, MatListModule],
-  templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+    selector: 'app-sidebar',
+    standalone: true,
+    templateUrl: './sidebar.component.html',
+    styleUrl: './sidebar.component.scss',
+    imports: [
+      MatSidenavModule, 
+      MatListModule, 
+      TableComponent]
 })
 
 export class SidebarComponent {

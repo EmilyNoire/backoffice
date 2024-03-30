@@ -31,24 +31,26 @@ export class TableComponent implements OnInit {
   loadData(): void {
     this.apiService.getStoreProducts().subscribe(data => {
       this.dataSource = data;
-      console.log(this.dataSource)
+      console.log('loadData', this.dataSource)
     });
   }
 
-  openModal(row: Product): void {
+  openModal(id: string, row: Product): void {
     console.log(row)
     const dialogRef = this.dialog.open(ModalReviewComponent, {
       width: '600px',
-      data: { data: row }
+      data: {
+        id: id,
+        data: row }
     });
 
     dialogRef.afterClosed().subscribe(() => {});
   }
 
-  onSelect(row: Product): void {
+  onSelect(id: string, row: Product): void {
     this.selectedRow = row;
     this.showReviewsColumn = true;
-    this.openModal(row);
+    this.openModal(id, row);
   }
 
 }

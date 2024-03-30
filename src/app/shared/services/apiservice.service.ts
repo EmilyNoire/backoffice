@@ -16,7 +16,6 @@ export class APIService {
     return this.http.get<any>(`${this.apiUrl}/stores/${this.idStore}/products`);
   }
 
-  //chiamata post
   postData(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/data`, data);
   }

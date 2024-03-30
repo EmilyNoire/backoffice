@@ -1,0 +1,19 @@
+    @if(!editing){
+        <td mat-cell>{{ reviewItem.text }}</td>
+        <td mat-cell>
+            <button mat-icon-button (click)="startEditing()">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </td>
+    } 
+    @else {
+        <input type="text" [(ngModel)]="editedText">
+        <button mat-icon-button (click)="saveEdit()">
+            <mat-icon>done</mat-icon>
+        </button>
+    }
+    <td mat-cell>
+        <button mat-icon-button (click)="deleteRow()">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </td>

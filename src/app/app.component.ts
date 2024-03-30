@@ -9,7 +9,8 @@ import { SidebarComponent } from "./core/sidebar/sidebar.component";
     styleUrl: './app.component.scss',
     imports: [
       HeaderComponent, 
-      SidebarComponent]
+      SidebarComponent
+    ]
 })
 export class AppComponent {
   title = 'BackOffice App';

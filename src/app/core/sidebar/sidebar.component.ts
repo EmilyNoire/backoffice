@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { TableComponent } from "../table/table.component";
+import { RouterOutlet, RouterLink } from '@angular/router';
 
 
 @Component({
@@ -12,11 +13,14 @@ import { TableComponent } from "../table/table.component";
     imports: [
       MatSidenavModule, 
       MatListModule, 
-      TableComponent]
+      TableComponent,
+      RouterOutlet,
+      RouterLink
+    ]
 })
 
 export class SidebarComponent {
-  sidebarItems: string[] = ['Item 1', 'Item 2', 'Item 3', 'Item 4']; // Array of sidebar items
+  sidebarItems: string[] = ['dashboard', 'newproduct', 'Item 3', 'Item 4'];
   highlightedItem: string | null = null;
 
   highlightItem(item: string): void {

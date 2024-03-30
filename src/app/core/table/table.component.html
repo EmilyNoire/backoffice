@@ -10,7 +10,7 @@
                     {{ element.data[column] }}
                 }
                 @else {
-                    <span class="icon" (click)="onSelect(element.data)">
+                    <span class="icon" (click)="onSelect(element.id, element.data)">
                         {{ element.data[column]?.length || '0' }} <mat-icon aria-label="Edit">edit</mat-icon>
                     </span>               
                 }

@@ -1,6 +1,34 @@
-.ellipsis {
-    max-width: 150px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+@import '../../../styles.scss';
+
+mat-table {
+    .ellipsis {
+        max-width: 150px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    mat-row:nth-child(even) {
+        background-color: $opacity-even;
+    }
+
+    mat-row:nth-child(odd) {
+        background-color: $opacity-odd;
+    }
+
+    mat-header-row {
+        background-color: $header-opacity;
+        mat-header-cell {
+            max-width: 150px;
+        }
+    }
+
+    mat-icon {
+        cursor: pointer;
+        padding: 2px;
+        &:hover{
+            background-color: $header-opacity;
+            border-radius: 16px;
+        }
+    }
 }

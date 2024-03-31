@@ -1,14 +1,14 @@
-<header class="header-container" role="banner">
-    <mat-toolbar color="primary">
+<header class="header-container">
+    <mat-toolbar class="primary-scheme">
         <mat-toolbar-row>
             <div class="header-left">
-                <img src="path_to_your_svg_image.svg" alt="Logo" class="logo">
+                <img src="../../../assets/logo.jpg" alt="Logo" class="logo">
             </div>
             <div class="header-right">
                 <button mat-icon-button aria-label="profile">
                     <mat-icon>account_circle</mat-icon>
                 </button>
-                <span class="username">Username</span>
+                <span class="username">{{this.username}}</span>
             </div>
         </mat-toolbar-row>
     </mat-toolbar>

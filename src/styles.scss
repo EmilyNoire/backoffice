@@ -1,4 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+//colors
+$primary-color: #004A5F;
+$odd-color: #00818E;
+$even-color: #80BFC4;
+
+$opacity-odd: rgba($odd-color, 0.1);
+$opacity-even: rgba($even-color, 0.1);
+$header-opacity: rgba($primary-color, 0.4);
+
+//margin
+.margin-16 {
+    margin: 16px 8px;
+}
+
+.margin-top-16 {
+    margin-top: 16px;
+}
+
+//width
+.width-90 {
+    width: 90%;
+}
+
+//custom elements
+.primary-scheme {
+    background-color: $primary-color !important;
+    color: #fff !important;
+}

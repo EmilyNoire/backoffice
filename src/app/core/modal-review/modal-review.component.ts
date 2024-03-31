@@ -5,6 +5,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormControl, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { ModalReviewRowComponent } from './modal-review-row/modal-review-row.component';
 import { Review } from '../../shared/interfaces/reviews';
+import { APIService } from '../../shared/services/apiservice.service';
+import { EMPTY, catchError, from, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-modal-review',
@@ -18,7 +20,7 @@ export class ModalReviewComponent implements OnInit {
     review: new FormControl('', Validators.required),
   });
   indexReview:Review[] = [];
-  constructor(@Inject(MAT_DIALOG_DATA) public row: any,) {
+  constructor(@Inject(MAT_DIALOG_DATA) public row: any, private apiService: APIService) {
   }
 
   ngOnInit(): void {
@@ -51,6 +53,22 @@ export class ModalReviewComponent implements OnInit {
     if (index !== -1) {
       this.indexReview.splice(index, 1);
     };
+  }
+
+  saveNewReviews() {
+    this.row.data.reviews = this.indexReview.map(review => review.text)
+    console.log(this.row)
+    from(this.apiService.deleteProduct(this.row.id)).pipe(
+    switchMap(() => this.apiService.setNewProduct(this.row.data)),
+    catchError((error) => {
+      console.error('Error deleting or saving product:', error);
+      return EMPTY;
+    })
+  ).subscribe(
+    (response) => {
+      console.log('Product updated successfully:', response);
+    }
+  );
   }
 
   //TODO: eliminazione del vecchio campo con l'id e le vecchie recensioni e salvataggio dei dati con la nuova recensione

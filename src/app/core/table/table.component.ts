@@ -7,20 +7,22 @@ import { ModalReviewComponent } from '../modal-review/modal-review.component';
 import { Product } from '../../shared/interfaces/product';
 import { CommonModule } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { EMPTY, catchError, switchMap } from 'rxjs';
+import { NewProductComponent } from '../new-product/new-product.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [MatTableModule, MatTooltipModule, MatIconModule, CommonModule],
+  imports: [MatTableModule, MatTooltipModule, MatIconModule, CommonModule, MatButtonModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
 })
 export class TableComponent implements OnInit {
 
-  displayedColumns: string[] = ['category', 'title', 'description', 'price', 'employee', 'reviews'];
+  displayedColumns: string[] = ['actions', 'category', 'title', 'description', 'price', 'employee', 'reviews'];
   dataSource: Product[] = [];
-  showReviewsColumn = false;
-  selectedRow: any = null;
+  
 
   constructor(private apiService: APIService, public dialog: MatDialog) { }
 
@@ -35,22 +37,41 @@ export class TableComponent implements OnInit {
     });
   }
 
-  openModal(id: string, row: Product): void {
-    console.log(row)
-    const dialogRef = this.dialog.open(ModalReviewComponent, {
+  newProduct(): void {
+    this.dialog.open(NewProductComponent, {width: '600px'})
+  }
+
+  editReview(id: string, row: Product): void {
+    this.dialog.open(ModalReviewComponent, {
       width: '600px',
       data: {
         id: id,
-        data: row }
+        data: row
+       }
     });
-
-    dialogRef.afterClosed().subscribe(() => {});
   }
 
-  onSelect(id: string, row: Product): void {
-    this.selectedRow = row;
-    this.showReviewsColumn = true;
-    this.openModal(id, row);
+  editProduct(id: string, row: Product, reviews: string[]): void {
+    this.dialog.open(NewProductComponent, {
+      width: '600px',
+      data: {
+        id: id,
+        data: row,
+        reviews: reviews || []
+      }
+    });
+  }
+
+  deleteProduct(id: string) {
+    this.apiService.deleteProduct(id).pipe(
+          switchMap(() => this.apiService.getStoreProducts()),
+          catchError((error) => {
+            console.error('Error deleting product:', error);
+            return EMPTY;
+          })
+        ).subscribe((products) => {
+          this.dataSource = products;
+        });
   }
 
 }

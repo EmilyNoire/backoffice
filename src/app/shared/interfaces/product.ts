@@ -12,3 +12,7 @@ export interface Product extends BaseProduct {
 }
 
 export interface SetProduct extends BaseProduct {}
+
+export interface APIProduct {
+    data: Product;
+}

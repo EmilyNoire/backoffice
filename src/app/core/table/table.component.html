@@ -7,7 +7,7 @@
     @for(column of displayedColumns; track column) {
         <ng-container [matColumnDef]="column">
             <mat-header-cell *matHeaderCellDef>
-                 {{ column }} 
+                 {{ column | uppercase }} 
             </mat-header-cell>
             <mat-cell *matCellDef="let element" [ngClass]="'ellipsis'" 
                 [matTooltip]="element.data[column]"

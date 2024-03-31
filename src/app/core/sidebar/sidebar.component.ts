@@ -3,6 +3,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { TableComponent } from "../table/table.component";
 import { RouterOutlet, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
@@ -15,12 +16,13 @@ import { RouterOutlet, RouterLink } from '@angular/router';
       MatListModule, 
       TableComponent,
       RouterOutlet,
-      RouterLink
+      RouterLink,
+      CommonModule
     ]
 })
 
 export class SidebarComponent {
-  sidebarItems: string[] = ['dashboard', 'newproduct', 'Item 3', 'Item 4'];
+  sidebarItems: string[] = ['dashboard', 'chart'];
   highlightedItem: string | null = null;
 
   highlightItem(item: string): void {

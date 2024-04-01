@@ -59,21 +59,16 @@ export class ModalReviewComponent implements OnInit {
 
   saveNewReviews() {
     this.row.data.reviews = this.indexReview.map(review => review.text)
-    console.log(this.row)
-    from(this.apiService.deleteProduct(this.row.id)).pipe(
-    switchMap(() => this.apiService.setNewProduct(this.row.data)),
-    catchError((error) => {
-      console.error('Error deleting or saving product:', error);
-      return EMPTY;
-    })
-  ).subscribe(
-    (response) => {
-      console.log('Product updated successfully:', response);
-    }
-  );
+      from(this.apiService.deleteProduct(this.row.id)).pipe(
+      switchMap(() => this.apiService.setNewProduct(this.row.data)),
+      catchError((error) => {
+        console.error('Error deleting or saving product:', error);
+        return EMPTY;
+      })
+    ).subscribe(
+      (response) => {
+        console.log('Product updated successfully:', response);
+      }
+    );
   }
-
-  //TODO: eliminazione del vecchio campo con l'id e le vecchie recensioni e salvataggio dei dati con la nuova recensione
-  //TODO: dopo aver salvato i dati si deve chiudere da solo e il numero accanto a review deve aggiornarsi.
-
 }

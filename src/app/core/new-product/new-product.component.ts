@@ -32,7 +32,6 @@ export class NewProductComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
-    console.log(this.data)
     if (this.data) {
       this.isEditing = true;
       this.newProductForm.setValue({

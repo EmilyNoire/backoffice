@@ -22,13 +22,16 @@ mat-table {
             max-width: 150px;
         }
     }
-
-    mat-icon {
-        cursor: pointer;
-        padding: 2px;
-        &:hover{
-            background-color: $header-opacity;
-            border-radius: 16px;
-        }
-    }
 }
+
+mat-card {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 250px;        
+    
+    mat-card-content,mat-card-title,mat-card-subtitle {
+        max-width: 300px;
+        word-wrap: break-word;
+    }   
+}
+

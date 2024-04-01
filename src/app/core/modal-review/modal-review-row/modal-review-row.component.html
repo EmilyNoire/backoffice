@@ -1,19 +1,11 @@
+<td mat-cell class="cell-container">
     @if(!editing){
-        <td mat-cell>{{ reviewItem.text }}</td>
-        <td mat-cell>
-            <button mat-icon-button (click)="startEditing()">
-                <mat-icon>edit</mat-icon>
-            </button>
-        </td>
+        <mat-icon (click)="deleteRow()" class="icon-cell">delete</mat-icon>
+        <mat-icon (click)="startEditing()" class="icon-cell">edit</mat-icon>
+        {{ reviewItem.text }}     
     } 
     @else {
-        <input type="text" [(ngModel)]="editedText">
-        <button mat-icon-button (click)="saveEdit()">
-            <mat-icon>done</mat-icon>
-        </button>
+        <input matInput type="text" class='input-height' [(ngModel)]="editedText">
+        <mat-icon (click)="saveEdit()" class="icon-cell">done</mat-icon>
     }
-    <td mat-cell>
-        <button mat-icon-button (click)="deleteRow()">
-            <mat-icon>delete</mat-icon>
-        </button>
-    </td>
+</td>

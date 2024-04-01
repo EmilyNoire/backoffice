@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Recensioni</h2>
 <div mat-dialog-content>
-    <table mat-table class="mat-elevation-z8">
+    <table mat-table>
         @if(this.indexReview && this.indexReview.length > 0) {
             @for(reviewItem of indexReview; track reviewItem) {
                 <tr>
@@ -16,16 +16,16 @@
 </div>
 <div>
     <form [formGroup]="newReviews" (ngSubmit)="onSubmit()">
-        <label for="newreview">Aggiungi una nuova recensione</label>
-        <input id="newreview" type="text" formControlName="review">
-    
-    
-        <button mat-icon-button>
-            <mat-icon aria-label="Save" type="submit">save</mat-icon>
-        </button>
+        <mat-form-field class="width-90">
+            <label for="newreview">Aggiungi una nuova recensione</label>
+            <p>
+                <input id="newreview" type="text" formControlName="review" class="width-90">
+            </p>        
+        </mat-form-field>
+        <mat-icon aria-label="Save" type="submit">save</mat-icon>
     </form>
 </div>
 <div mat-dialog-actions>
-    <button mat-button [mat-dialog-close]="true" (click)="saveNewReviews()">Salva e chiudi</button>
-    <button mat-button [mat-dialog-close]="true">Chiudi</button>
+    <button mat-raised-button [mat-dialog-close]="true" class="margin-16 primary-scheme" (click)="saveNewReviews()">Salva e chiudi</button>
+    <button mat-raised-button [mat-dialog-close]="true" class="margin-16 primary-scheme">Chiudi</button>
 </div>

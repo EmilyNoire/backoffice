@@ -2,37 +2,77 @@
 <button mat-raised-button class="margin-16 primary-scheme" (click)="newProduct()">
     Add new Product
 </button>
+<button mat-raised-button class="margin-16 primary-scheme" (click)="changeView()">
+    Change view
+</button>
 
-<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    @for(column of displayedColumns; track column) {
+@if(this.changeview) {
+    <mat-grid-list cols="3" rowHeight="300px">
+        @for(product of this.cardData; track product) {
+            <mat-grid-tile>
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title class="ellipsis">{{ product.data.title }}</mat-card-title>
+                        <mat-icon style="margin-left: auto" (click)="deleteProduct(product.id)">delete</mat-icon>
+                        <mat-card-subtitle class="ellipsis">{{ product.data.category }}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content class="ellipsis">
+                        <strong>Price:</strong> {{ product.data.price }} €
+                    </mat-card-content>
+                    <mat-card-content class="ellipsis">
+                        <strong>Description:</strong> {{ product.data.description }}
+                    </mat-card-content>
+                    <mat-card-content class="ellipsis">
+                        <strong>Employee:</strong> {{ product.data.employee }}
+                    </mat-card-content>
+                    <mat-card-content class="ellipsis">
+                        <strong>Reviews</strong>
+                        <span class="icon" (click)="editReview(product.id, product.data)">
+                            {{ product.data['reviews']?.length || '0' }} <mat-icon aria-label="Edit">edit</mat-icon>
+                        </span>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <mat-icon (click)="editProduct(product.id, product.data, product.data['reviews'])" class="icon-size">edit</mat-icon>
+                    </mat-card-actions>
+                </mat-card>
+            </mat-grid-tile>
+        }
+    </mat-grid-list>
+}
+@else {
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        @for(column of displayedColumns; track column) {
         <ng-container [matColumnDef]="column">
             <mat-header-cell *matHeaderCellDef>
-                 {{ column | uppercase }} 
+                {{ column | uppercase }}
             </mat-header-cell>
-            <mat-cell *matCellDef="let element" [ngClass]="'ellipsis'" 
-                [matTooltip]="element.data[column]"
+            <mat-cell *matCellDef="let element" [ngClass]="'ellipsis'" [matTooltip]="element.data[column]"
                 [matTooltipDisabled]="element.data[column]?.length < 20">
                 @switch(true){
-                    @case (column !== 'reviews' && column !== 'actions') {
-                        {{ element.data[column] }}
-                    }
-                    @case (column === 'reviews') {
-                        <span class="icon" (click)="editReview(element.id, element.data)">
-                            {{ element.data[column]?.length || '0' }} <mat-icon aria-label="Edit">edit</mat-icon>
-                        </span>
-                    }
-                    @case (column === 'actions') {
-                        
-                            <mat-icon (click)="editProduct(element.id, element.data, element.data['reviews'])" class="icon-size">edit</mat-icon>
-                        
-                        
-                            <mat-icon (click)="deleteProduct(element.id)">delete</mat-icon>
-                       
-                    }
+                @case (column !== 'reviews' && column !== 'actions') {
+                {{ element.data[column] }}
+                }
+                @case (column === 'reviews') {
+                <span class="icon" (click)="editReview(element.id, element.data)">
+                    {{ element.data[column]?.length || '0' }} 
+                    <mat-icon class="icon-size" aria-label="Edit">edit</mat-icon>
+                </span>
+                }
+                @case (column === 'actions') {
+    
+                <mat-icon (click)="editProduct(element.id, element.data, element.data['reviews'])"
+                    class="icon-size">edit</mat-icon>
+    
+    
+                <mat-icon (click)="deleteProduct(element.id)">delete</mat-icon>
+    
+                }
                 }
             </mat-cell>
         </ng-container>
-    }
-    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
+        }
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+}
+

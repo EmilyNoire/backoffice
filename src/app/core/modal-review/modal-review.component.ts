@@ -2,16 +2,18 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { FormControl, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { ModalReviewRowComponent } from './modal-review-row/modal-review-row.component';
 import { Review } from '../../shared/interfaces/reviews';
 import { APIService } from '../../shared/services/apiservice.service';
 import { EMPTY, catchError, from, switchMap } from 'rxjs';
+import { APIProduct } from '../../shared/interfaces/product';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-modal-review',
   standalone: true,
-  imports: [MatButtonModule, MatDialogModule, MatIconModule, ReactiveFormsModule, ModalReviewRowComponent],
+  imports: [MatButtonModule, MatDialogModule, MatIconModule, ReactiveFormsModule, ModalReviewRowComponent, MatButtonModule, MatFormFieldModule],
   templateUrl: './modal-review.component.html',
   styleUrl: './modal-review.component.scss'
 })
@@ -20,7 +22,7 @@ export class ModalReviewComponent implements OnInit {
     review: new FormControl('', Validators.required),
   });
   indexReview:Review[] = [];
-  constructor(@Inject(MAT_DIALOG_DATA) public row: any, private apiService: APIService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public row: APIProduct, private apiService: APIService) {
   }
 
   ngOnInit(): void {

@@ -30,3 +30,13 @@ $header-opacity: rgba($primary-color, 0.4);
     background-color: $primary-color !important;
     color: #fff !important;
 }
+
+mat-icon {
+    cursor: pointer;
+    padding: 2px;
+
+    &:hover {
+        background-color: $header-opacity;
+        border-radius: 16px;
+    }
+}
